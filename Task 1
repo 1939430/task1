@@ -1,0 +1,182 @@
+<?php
+$validatefirstname="";
+$validatelastname="";
+$validateage="";
+
+$validateradio="";
+$validatecheckbox="";
+$validateemail="";
+$validatepassword="";
+$v1=$v2=$v3=$v4=$v5=$v6="";
+$firstname=$lastname=$age=$designation=$email=$password="";
+if($_SERVER["REQUEST_METHOD"]=="POST")
+{
+$firstname=$_REQUEST["fname"];
+$lastname=$_REQUEST["lname"];
+$age=$_REQUEST["age"];
+$email=$_REQUEST["email"];
+$password=$_REQUEST["password"];
+
+if(empty($_REQUEST["fname"]) || (strlen($_REQUEST["fname"])<5))
+{
+    $validatename= "you must enter name";
+
+}
+else
+{
+    $name=$_REQUEST["fname"];
+}
+if(empty($_REQUEST["lname"]) || (strlen($_REQUEST["lname"])<5))
+{
+    $validatename= "you must enter name";
+
+}
+else
+{
+    $name=$_REQUEST["lname"];
+}
+if(empty($age) || !preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$age))
+{
+    $validateage="you must enter age";
+}
+else{
+    $validateage= "your age is ".$age;
+}
+if(!isset($_REQUEST["language1"])&&!isset($_REQUEST["language2"])&&!isset($_REQUEST["language3"]))
+{
+    $validatecheckbox = "please select at least one checkbox";
+    
+}
+else{
+   if(isset($_REQUEST["language1"]))
+   {
+       $v1= $_REQUEST["language1"];
+   }
+   if(isset($_REQUEST["language2"]))
+   { 
+       $v2= $_REQUEST["language2"];
+   }
+   if(isset($_REQUEST["language3"]))
+   {
+    $v3= $_REQUEST["language3"];
+   }
+}
+
+
+
+if(empty($email) || !preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email))
+{
+    $validateemail="you must enter email";
+}
+else{
+    $validateemail= "your email is ".$email;
+}
+if(!isset($_REQUEST["language1"])&&!isset($_REQUEST["language2"])&&!isset($_REQUEST["language3"]))
+{
+    $validatecheckbox = "please select at least one checkbox";
+    
+}
+else{
+   if(isset($_REQUEST["language1"]))
+   {
+       $v1= $_REQUEST["language1"];
+   }
+   if(isset($_REQUEST["language2"]))
+   { 
+       $v2= $_REQUEST["language2"];
+   }
+   if(isset($_REQUEST["language3"]))
+   {
+    $v3= $_REQUEST["language3"];
+   }
+}
+if(empty($password) || !preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$password))
+{
+    $validatepassword="you must enter password";
+}
+else{
+    $validatepassword= "your email is ".$password;
+}
+if(!isset($_REQUEST["language1"])&&!isset($_REQUEST["language2"])&&!isset($_REQUEST["language3"]))
+{
+    $validatecheckbox = "please select at least one checkbox";
+    
+}
+else{
+   if(isset($_REQUEST["language1"]))
+   {
+       $v1= $_REQUEST["language1"];
+   }
+   if(isset($_REQUEST["language2"]))
+   { 
+       $v2= $_REQUEST["language2"];
+   }
+   if(isset($_REQUEST["language3"]))
+   {
+    $v3= $_REQUEST["language3"];
+   }
+}
+if(isset($_REQUEST["designation"]))
+{
+    $validateradio= $_REQUEST["designation"];
+}
+else{
+    $validateradio= "please select at least one radio";
+}
+}
+?>
+<?php include "control/results.php"; ?>
+
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Registration form </h1>
+<form action="" method="post">
+Enter your first name: <input type="text" name="fname"> <?php echo $validatefirstname; ?>
+<br>
+<br>
+Enter your last name: <input type="text" name="lname"> <?php echo $validatelastname; ?>
+<br>
+<br>
+Enter your age: <input type="text" name="age"> <?php echo $validateage; ?>
+<br>
+<br>
+Enter your email: <input type="text" name="email"> <?php echo $validateemail; ?>
+<br><br>
+Enter your password: <input type="text" name="password"> <?php echo $validatepassword; ?>
+<br>
+<br>
+you options are
+<br>
+
+<input type="checkbox" id="language1" name="language" value="Java">
+ I prefer Java<br>
+<input type="checkbox" id="language2" name="language2" value="PHP">
+I prefer PHP<br>
+<input type="checkbox" id="language3" name="language3" value="C++">
+ I prefer C++<br>
+<br>
+<?php echo $validatecheckbox; ?>
+
+<?php echo $v1;?>
+
+<?php echo $v2;?>
+
+<?php echo $v3;?>
+<br>
+<p>Please select your designation:</p>
+  <input type="radio" id="junior programmer" name="designation" value="junior programmer">
+  <label for="junior programmer">Junior Programmer</label><br>
+  <input type="radio" id="senior programmer" name="designation" value="senior programmer">
+  <label for="senior programmer">Senior Programmer</label><br>
+  <input type="radio" id="project lead" name="designation" value="project lead">
+  <label for="project lead">Project Lead</label>
+  <br>
+  <?php echo $validateradio; ?>
+<br>
+
+<input type="submit" value="SUBMIT">
+<input type="reset" value="RESET">
+</form>
+</body>
+</html>
